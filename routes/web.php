@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(ProjectController::class)->as('project.')->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::prefix('/project')->group(function() {
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/{project}', 'edit')->name('edit');
+        Route::post('/{project}', 'update')->name('update');
+    });
+});
+
+
+Route::controller(TaskController::class)->as('task.')->group(function() {
+    Route::prefix('/task')->group(function() {
+        Route::get('{project}/create', 'create')->name('create');
+        Route::post('{project}/store', 'store')->name('store');
+        Route::get('/{task}', 'edit')->name('edit');
+        Route::post('/{task}', 'update')->name('update');
+    });
 });
