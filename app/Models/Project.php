@@ -9,6 +9,7 @@ class Project extends Model
 {
     protected $fillable = [
         'title',
+        'token',
         'delivery_date',
         'due_date',
     ];
@@ -20,8 +21,13 @@ class Project extends Model
 
     public $timestamps =  true;
 
-    protected function tasks()
+    public function tasks()
     {
         return $this->hasMany(Task::class);
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class);
     }
 }

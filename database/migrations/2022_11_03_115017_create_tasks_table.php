@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();
-            $table->foreignId('project_id')->references('id')->on('projects')->cascadeOnDelete();
+            $table->foreignId('project_id')->constrained('projects')->cascadeOnDelete();
+            $table->string('token')->index();
             $table->timestamps();
         });
     }

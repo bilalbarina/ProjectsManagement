@@ -9,6 +9,7 @@ class Task extends Model
 {
     protected $fillable = [
         'title',
+        'token',
         'description',
         'start_date',
         'end_date',

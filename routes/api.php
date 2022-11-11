@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ProjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PromotionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/promotion/{promotion:token}/update-title', [PromotionController::class, 'updateTitle'])
+    ->name('promotion.updateTitle');
+
+Route::post('/project/{project:token}/update-title', [ProjectController::class, 'updateTitle'])
+    ->name('project.updateTitle');

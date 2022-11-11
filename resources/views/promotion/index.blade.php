@@ -1,12 +1,12 @@
 @extends('layouts.master', [
-    'title' => 'Projects Manager',
+    'title' => 'Promotions Manager',
 ])
 
 @section('body')
     <div class="container py-24">
         <div class="max-w-2xl mx-auto">
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg border">
-                <div class="text-xl font-semibold mt-4 pl-6"> Breifs </div>
+                <div class="text-xl font-semibold mt-4 pl-6"> Promotions </div>
                 <div class="p-4 flex justify-between items-center">
                     <div>
                         <label for="table-search" class="sr-only">Search</label>
@@ -21,20 +21,20 @@
                             </div>
                             <input type="text" id="search-input"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5"
-                                placeholder="Recherche de briefs">
+                                placeholder="Recherche de promotions">
                         </div>
 
                     </div>
                     <div>
-                        <a href="{{ route('project.create') }}"
+                        <a href="{{ route('promotion.create') }}"
                             class="py-2 px-4 bg-blue-600 text-white rounded-full text-xs font-semibold">
-                            Ajouter brief
+                            Ajouter promotion
                         </a>
                     </div>
                 </div>
-                <div id="projects">
-                    @component('components.project.table', [
-                        'projects' => $projects
+                <div id="promotions">
+                    @component('components.promotion.table', [
+                        'promotions' => $promotions
                     ])
                     @endcomponent
                 </div>
@@ -49,13 +49,13 @@
     $('#search-input').on('input', function() {
         console.log('searching')
         $.ajax({
-            url: '{{ route('project.search') }}',
+            url: '{{ route('promotion.search') }}',
             cache: false,
             data: {
                 'title': this.value
             },
             success: (data) => {
-                $('#projects').html(data)
+                $('#promotions').html(data)
             }
         })
     })
